@@ -205,12 +205,6 @@ var buildings3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?ser
 }).addTo(map);
 
 function setMap(locationData) {
-    var markerOptions = {
-        title: "You are here",
-    };
-
-    console.log(locationData);
-
     let searchFields = document.getElementById("searchFields");
     let cityDropDown = document.createElement("select");
 
@@ -232,35 +226,23 @@ function setMap(locationData) {
     }
     searchFields.appendChild(cityDropDown);
 
-    console.log(locationData);
+    let refinedData = locationData.items;
 
     document.getElementById("cityDropDown").addEventListener("change", function () {
-        console.log("test");
-        let selectedCity = document.getElementById("citySelect").textContent;
-        for (let i = 0; i < locationData.items.length; i++) {
-            console.log(selectedCity);
-            if (locationData.items[i].name == selectedCity) {
-                console.log("Found!");
-            } else {
-                console.log("Not found");
-            }
-        }
-
-        // map.setView([locationData.latitude, locationData.longitude]);
-        // L.marker([locationData.latitude, locationData.longitude, markerOptions]).addTo(map);
+        console.log(refinedData);
+        let selectedCity = document.getElementById("cityDropDown").selectedIndex;
+        console.log(selectedCity);
     });
 }
 
 function success(position) {
-    let location = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-    };
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
 
     console.log("Your current location:");
     console.log(position);
 
-    setMap(location);
+    map.flyTo(new L.LatLng(latitude, longitude), 8);
 }
 
 function useMyLocation() {
