@@ -3,7 +3,7 @@ let latitude, longitude;
 var map = L.map("map", {
     center: [60.18, -102.2],
     zoom: 3,
-    crs: L.CRS.EPSG3857, // crs: L.CRS.EPSG3857,
+    crs: L.CRS.EPSG3857
 });
 
 var layer = L.marker([0, 0]).addTo(map);
@@ -30,234 +30,179 @@ console.log("test");
 
 console.log("test");
 
-//BOTH MAPS NEED THESE LAYERS
+//Shared Layers
 L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     maxZoom: 13,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-var provinces = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var provinces = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "provinces_names",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var placename1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var placename1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "places_mid",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var placename2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var placename2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "places_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var contour1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var contour1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "contour_elevation_250k_02",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var contour2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var contour2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "contour_approximative_250k_01",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var contour3 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var contour3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "contour_approximative_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var tracks1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var tracks1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "track_segment_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+ }).addTo(map);
 
-var tracks2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var tracks2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "track_segment_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var tracks3 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var tracks3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "track_segment_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var roads1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var roads1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "road_segment_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var roads2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var roads2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "roads_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var roads3 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var roads3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "road_segment_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterlines1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_small",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterlines2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_mid",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterlines3 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterlines4 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines4 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterbodies1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_small",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterbodies2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_mid",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterbodies3 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_continental_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterbodies4 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies4 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var waterbodies5 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies5 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var buildings1 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var buildings1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "residentialarea_250k_01",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var buildings2 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var buildings2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "residentialarea_250k_02",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
+}).addTo(map);
 
-var buildings3 = L.tileLayer
-    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var buildings3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "residentialarea_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    })
-    .addTo(map);
-
-var hotdays = L.tileLayer.wms("https://geo.weather.gc.ca/geomet-climate?service=WMS&version=1.3.0", {
-    layers: "INDICES.TX30.HISTO_PCTL50",
-    format: "image/png",
-    transparent: true,
-    attribution: "© Environment and Climate Change Canada",
-});
+}).addTo(map);
 
 function setMap(locationData) {
     var markerOptions = {

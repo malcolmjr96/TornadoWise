@@ -1,4 +1,10 @@
-//Layers for resident map
+var hotdays = L.tileLayer.wms("https://geo.weather.gc.ca/geomet-climate?service=WMS&version=1.3.0", {
+    layers: "INDICES.TX30.HISTO_PCTL50",
+    format: "image/png",
+    transparent: true,
+    attribution: "© Environment and Climate Change Canada",
+});
+
 var weatheralerts = L.tileLayer.wms("https://geo.weather.gc.ca/geomet?lang=en&service=WMS", {
     layers: "ALERTS",
     format: "image/png",
@@ -21,9 +27,10 @@ var meantemp = L.tileLayer.wms("https://geo.weather.gc.ca/geomet-climate?service
 });
 
 var overlaymaps = {
+    "Days above 30C": hotdays,
     "Weather Alerts": weatheralerts,
     "Total Precipitation in the Summer": totalprecip,
-    "Mean Temperature in the Summer": meantemp,
+    "Mean Temperature in the Summer": meantemp
 };
 
 L.control.layers(null, overlaymaps).addTo(map);
