@@ -26,6 +26,7 @@ let provinceCodes = {
     73: "International Waters",
 };
 
+//BOTH MAPS NEED THESE LAYERS
 L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     maxZoom: 13,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -199,15 +200,16 @@ var buildings3 = L.tileLayer.wms('https://maps.geogratis.gc.ca/wms/canvec_en?ser
     attribution: '© Natural Resources Canada'
 }).addTo(map);
 
-var weatheralerts = L.tileLayer.wms('https://geo.weather.gc.ca/geomet?lang=en&service=WMS', {
-    layers: 'ALERTS',
+var hotdays = L.tileLayer.wms('https://geo.weather.gc.ca/geomet-climate?service=WMS&version=1.3.0',{
+    layers: 'INDICES.TX30.HISTO_PCTL50',
     format: 'image/png',
     transparent: true,
     attribution: '© Environment and Climate Change Canada'
 });
 
-var hotdays = L.tileLayer.wms('https://geo.weather.gc.ca/geomet-climate?service=WMS&version=1.3.0',{
-    layers: 'INDICES.TX30.HISTO_PCTL50',
+//Layers for resident map
+var weatheralerts = L.tileLayer.wms('https://geo.weather.gc.ca/geomet?lang=en&service=WMS', {
+    layers: 'ALERTS',
     format: 'image/png',
     transparent: true,
     attribution: '© Environment and Climate Change Canada'
