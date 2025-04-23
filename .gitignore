@@ -1,2 +1,4 @@
 /node_modules
 /.vscode
+public/qgis/css/images/*
+public/qgis/legend/*
