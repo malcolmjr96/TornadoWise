@@ -33,6 +33,8 @@ app.post("/searchCity", function (req, res) {
     xhttp.send();
 });
 
+app.post("/processGeo", function (req, res) {});
+
 app.listen(port, function (req, res) {
     console.log(`Listening on port ${port}.`);
 });

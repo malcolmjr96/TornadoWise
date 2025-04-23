@@ -26,6 +26,8 @@ let provinceCodes = {
     73: "International Waters",
 };
 
+console.log("test");
+
 L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     maxZoom: 13,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
