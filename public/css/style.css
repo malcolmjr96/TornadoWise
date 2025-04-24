@@ -7,7 +7,7 @@
 .nav-container {
     display: flex;
     height: 40px;
-    background-color: #eed202;
+    background-color: #ffcb9a;
     justify-content: space-between;
     width: 100%;
     padding-left: 35%;
@@ -27,11 +27,16 @@
 
 .list-item:hover {
     height: 100%;
-    background-color: #fff081;
+    background-color: #d9b08c;
 }
 
 .list-item a:hover {
     text-decoration: underline;
+}
+
+section {
+    text-align: center;
+    padding: 5px;
 }
 
 .theTeam {
@@ -74,10 +79,10 @@
     margin-bottom: 2px;
 }
 
-.team-container section p {
+/* .team-container section p {
     margin: 1rem;
     color: red;
-}
+}  */
 
 .gt-wrapper {
     margin: 0 1rem 0 1rem;
@@ -104,7 +109,7 @@
 }
 
 .gt-policymakers {
-    background-color: #7a5000;
+    background-color: #123c69;
 }
 
 .copyright {
