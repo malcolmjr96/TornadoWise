@@ -30,7 +30,7 @@ let provinceCodes = {
 L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     maxZoom: 13,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-});
+}).addTo(map);
 
 var provinces = L.tileLayer
     .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
@@ -38,7 +38,8 @@ var provinces = L.tileLayer
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-    }).addTo(map);
+    })
+    .addTo(map);
 
 // var placename1 = L.tileLayer
 //     .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
@@ -287,30 +288,30 @@ fetch("https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Mart
         }).addTo(map);
     });
 
-    // provinces.addTo(map);
-    // placename1.addTo(map);
-    // placename2.addTo(map);
-    // contour1.addTo(map);
-    // contour2.addTo(map);
-    // contour3.addTo(map);
-    // tracks1.addTo(map);
-    // tracks2.addTo(map);
-    // tracks3.addTo(map);
-    // roads1.addTo(map);
-    // roads2.addTo(map);
-    // roads3.addTo(map);
-    // waterlines1.addTo(map);
-    // waterlines2.addTo(map);
-    // waterlines3.addTo(map);
-    // waterlines4.addTo(map);
-    // waterbodies1.addTo(map);
-    // waterbodies2.addTo(map);
-    // waterbodies3.addTo(map);
-    // waterbodies4.addTo(map);
-    // waterbodies5.addTo(map);
-    // buildings1.addTo(map);
-    // buildings2.addTo(map);
-    // buildings3.addTo(map);
+// provinces.addTo(map);
+// placename1.addTo(map);
+// placename2.addTo(map);
+// contour1.addTo(map);
+// contour2.addTo(map);
+// contour3.addTo(map);
+// tracks1.addTo(map);
+// tracks2.addTo(map);
+// tracks3.addTo(map);
+// roads1.addTo(map);
+// roads2.addTo(map);
+// roads3.addTo(map);
+// waterlines1.addTo(map);
+// waterlines2.addTo(map);
+// waterlines3.addTo(map);
+// waterlines4.addTo(map);
+// waterbodies1.addTo(map);
+// waterbodies2.addTo(map);
+// waterbodies3.addTo(map);
+// waterbodies4.addTo(map);
+// waterbodies5.addTo(map);
+// buildings1.addTo(map);
+// buildings2.addTo(map);
+// buildings3.addTo(map);
 
 function setMap(locationData) {
     results.innerHTML = "";
