@@ -30,22 +30,22 @@ var overlaymaps = {
     "Weather Alerts": weatheralerts,
     "Days above 30C": hotdays,
     "Total Precipitation in the Summer": totalprecip,
-    "Mean Temperature in the Summer": meantemp
+    "Mean Temperature in the Summer": meantemp,
 };
 
 L.control.layers(null, overlaymaps).addTo(map);
 
 var legend = L.control({
-    position: "bottomleft"});
+    position: "bottomleft",
+});
 
-legend.onAdd = function(map)
-{
-    var div = L.DomUtil.create("div","legend");
-        div.innerHTML += "<h4>Weather Alerts</h4>";
-        div.innerHTML += '<i style="background: #BB0000"></i><span>Warning</span><br>';
-        div.innerHTML += '<i style="background: #FFFF00"></i><span>Watch</span><br>';
-        div.innerHTML += '<i style="background: #707070"></i><span>Statement</span><br>';
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "legend");
+    div.innerHTML += "<h4>Weather Alerts</h4>";
+    div.innerHTML += '<i style="background: #BB0000"></i><span>Warning</span><br>';
+    div.innerHTML += '<i style="background: #FFFF00"></i><span>Watch</span><br>';
+    div.innerHTML += '<i style="background: #707070"></i><span>Statement</span><br>';
     return div;
-    };
+};
 
-legend.addTo(map)
+legend.addTo(map);

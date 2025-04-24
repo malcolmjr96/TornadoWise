@@ -29,15 +29,18 @@
 
             <h1>For Residents</h1>
         </header>
-        <main>
-            <article>
+        <main class="main-container">
+            <article class="search">
                 <section>
                     <div id="searchFields">
                         <input type="text" id="searchField" />
-                        <button onclick="useSearch()">Search</button>
-                        <button onclick="useMyLocation()">Use my location</button>
+                        <div class="searchControls">
+                            <button onclick="useSearch()">Search</button>
+                            <button onclick="useMyLocation()">Use my location</button>
+                        </div>
                     </div>
                 </section>
+                <aside id="results"></aside>
             </article>
             <div id="map"></div>
             <div id="legend"></div>
