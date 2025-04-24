@@ -50,6 +50,7 @@ section {
 
 .team-container {
     display: flex;
+    justify-content: center;
 }
 
 .team-container section {
@@ -71,6 +72,7 @@ section {
 
 .team-info {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
 }
 
@@ -142,4 +144,17 @@ section {
 
 #results {
     background-color: lightgrey;
+}
+
+.goalPoints,
+.projectScopes {
+    margin-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: left;
+}
+
+.goalPara,
+.projectPara {
+    text-align: left;
 }
