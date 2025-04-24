@@ -200,13 +200,20 @@ var buildings3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?ser
         attribution: "© Natural Resources Canada",
 }).addTo(map);
 
-//fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/Tornados_1980_2009.geojson')
-async function test() {
-        const url = "https://raw.githubusercontent.com/TornadoWise/TornadoWise/45cadb218e9596c9a0bd3fb0ed33a7a3ea7219d8/data/Tornados_1980_2009.geojson";
-    
-const response = await fetch(url)      
+fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/Tornados_1980_2009.geojson')    
 .then(res => res.json())
-  .then(data => {
+.then(data => {
+        data.features = data.features.map(f => ({
+                ...f,
+                geometry: {
+                  type: "Point",
+                  coordinates: [
+                    parseFloat(f.properties.start_lon),
+                    parseFloat(f.properties.start_lat)
+                  ]
+                }
+              }));
+
     L.geoJSON(data,{ 
         pointToLayer: function(feature, latlng) {
                 return L.circleMarker(latlng, {
@@ -226,13 +233,23 @@ const response = await fetch(url)
                 layer.bindPopup(popup);
               }
             }).addTo(map);
-})
-};
+});
 
 fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/TornadoTracks_1980_2009.geojson')
   .then(res => res.json())
   .then(data => {
-    L.geoJSON(data, {
+        data.features = data.features.map(f => ({
+                ...f,
+                geometry: {
+                  type: "LineString",
+                  coordinates: [
+                    [parseFloat(f.properties.start_lon), parseFloat(f.properties.start_lat)],
+                    [parseFloat(f.properties.end_lon), parseFloat(f.properties.end_lat)]
+                  ]
+                }
+              }));
+    
+        L.geoJSON(data, {
       style: function(feature) {
         return {
           color: "#ffff00",
