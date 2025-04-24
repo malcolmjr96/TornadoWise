@@ -265,7 +265,7 @@ fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Mart
     L.geoJSON(data,{ 
         pointToLayer: function(feature, latlng) {
                 return L.circleMarker(latlng, {
-                  radius: 8,
+                  radius: 4,
                   fillColor: "#ffff00", 
                   color: "#eaff00",
                   weight: 2,
@@ -275,7 +275,8 @@ fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Mart
               },
               onEachFeature: function(feature, layer) {
                 let props = feature.properties;
-                let popup = `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
+                let popup = `<b>Tornado</b>` + 
+                            `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
                              <b>Nearest Community:</b> ${props.nearcmmty || "N/A"}<br>
                              <b>Fujita Scale:</b> ${props.fujita_ || "N/A"}`;
                     layer.bindPopup(popup);
@@ -306,7 +307,8 @@ fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Mart
         };
       },
       onEachFeature: function(feature, layer) {
-        let popup = `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
+        let popup = `<b>Tornado Track</b>` + 
+                    `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
         layer.bindPopup(popup);
       }
     }).addTo(map);
