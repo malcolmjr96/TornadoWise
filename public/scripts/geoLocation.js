@@ -26,10 +26,6 @@ let provinceCodes = {
     73: "International Waters",
 };
 
-console.log("test");
-
-console.log("test");
-
 //Shared Layers
 L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     maxZoom: 13,
@@ -203,6 +199,53 @@ var buildings3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?ser
         transparent: true,
         attribution: "© Natural Resources Canada",
 }).addTo(map);
+
+//fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/Tornados_1980_2009.geojson')
+async function test() {
+        const url = "https://raw.githubusercontent.com/TornadoWise/TornadoWise/45cadb218e9596c9a0bd3fb0ed33a7a3ea7219d8/data/Tornados_1980_2009.geojson";
+    
+const response = await fetch(url)      
+.then(res => res.json())
+  .then(data => {
+    L.geoJSON(data,{ 
+        pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                  radius: 8,
+                  fillColor: "#ffff00", 
+                  color: "#eaff00",
+                  weight: 2,
+                  opacity: 1,
+                  fillOpacity: 0.9
+                });
+              },
+              onEachFeature: function(feature, layer) {
+                let props = feature.properties;
+                let popup = `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
+                             <b>Nearest Community:</b> ${props.nearcmmty || "N/A"}<br>
+                             <b>Fujita Scale:</b> ${props.fujita_ || "N/A"}`;
+                layer.bindPopup(popup);
+              }
+            }).addTo(map);
+})
+};
+
+fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/TornadoTracks_1980_2009.geojson')
+  .then(res => res.json())
+  .then(data => {
+    L.geoJSON(data, {
+      style: function(feature) {
+        return {
+          color: "#ffff00",
+          weight: 4,
+          opacity: 1
+        };
+      },
+      onEachFeature: function(feature, layer) {
+        let popup = `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
+        layer.bindPopup(popup);
+      }
+    }).addTo(map);
+});
 
 function setMap(locationData) {
     let searchFields = document.getElementById("searchFields");
