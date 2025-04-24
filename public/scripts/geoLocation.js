@@ -3,10 +3,10 @@ let latitude, longitude;
 var map = L.map("map", {
     center: [60.18, -102.2],
     zoom: 3,
-    crs: L.CRS.EPSG3857
+    crs: L.CRS.EPSG3857,
 });
 
-var layer = L.marker([0, 0]).addTo(map);
+var layer = L.marker([60.18, -102.2]).addTo(map);
 
 let provinceCodes = {
     10: "NL",
@@ -32,250 +32,321 @@ L.tileLayer(`https://tile.openstreetmap.org/{z}/{x}/{y}.png`, {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-var provinces = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var provinces = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "provinces_names",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var placename1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var placename1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "places_mid",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var placename2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var placename2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "places_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var contour1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var contour1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "contour_elevation_250k_02",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var contour2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var contour2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "contour_approximative_250k_01",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var contour3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var contour3 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "contour_approximative_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var tracks1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var tracks1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "track_segment_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
- }).addTo(map);
+    })
+    .addTo(map);
 
-var tracks2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var tracks2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "track_segment_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var tracks3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var tracks3 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "track_segment_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var roads1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var roads1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "road_segment_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var roads2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var roads2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "roads_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var roads3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var roads3 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "road_segment_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterlines1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_small",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterlines2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_mid",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterlines3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines3 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterlines4 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterlines4 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "watercourse_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterbodies1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_small",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterbodies2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_mid",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterbodies3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies3 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_continental_large",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterbodies4 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies4 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_250k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var waterbodies5 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var waterbodies5 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "waterbody_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var buildings1 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var buildings1 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "residentialarea_250k_01",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var buildings2 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var buildings2 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "residentialarea_250k_02",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
-var buildings3 = L.tileLayer.wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
+var buildings3 = L.tileLayer
+    .wms("https://maps.geogratis.gc.ca/wms/canvec_en?service=WMS", {
         layers: "residentialarea_50k",
         format: "image/png",
         transparent: true,
         attribution: "© Natural Resources Canada",
-}).addTo(map);
+    })
+    .addTo(map);
 
 //fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/Tornados_1980_2009.geojson')
 async function test() {
-        const url = "https://raw.githubusercontent.com/TornadoWise/TornadoWise/45cadb218e9596c9a0bd3fb0ed33a7a3ea7219d8/data/Tornados_1980_2009.geojson";
-    
-const response = await fetch(url)      
-.then(res => res.json())
-  .then(data => {
-    L.geoJSON(data,{ 
-        pointToLayer: function(feature, latlng) {
-                return L.circleMarker(latlng, {
-                  radius: 8,
-                  fillColor: "#ffff00", 
-                  color: "#eaff00",
-                  weight: 2,
-                  opacity: 1,
-                  fillOpacity: 0.9
-                });
-              },
-              onEachFeature: function(feature, layer) {
-                let props = feature.properties;
-                let popup = `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
+    const url = "https://raw.githubusercontent.com/TornadoWise/TornadoWise/45cadb218e9596c9a0bd3fb0ed33a7a3ea7219d8/data/Tornados_1980_2009.geojson";
+
+    const response = await fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            L.geoJSON(data, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, {
+                        radius: 8,
+                        fillColor: "#ffff00",
+                        color: "#eaff00",
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.9,
+                    });
+                },
+                onEachFeature: function (feature, layer) {
+                    let props = feature.properties;
+                    let popup = `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
                              <b>Nearest Community:</b> ${props.nearcmmty || "N/A"}<br>
                              <b>Fujita Scale:</b> ${props.fujita_ || "N/A"}`;
-                layer.bindPopup(popup);
-              }
+                    layer.bindPopup(popup);
+                },
             }).addTo(map);
-})
-};
+        });
+}
 
-fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/TornadoTracks_1980_2009.geojson')
-  .then(res => res.json())
-  .then(data => {
-    L.geoJSON(data, {
-      style: function(feature) {
-        return {
-          color: "#ffff00",
-          weight: 4,
-          opacity: 1
-        };
-      },
-      onEachFeature: function(feature, layer) {
-        let popup = `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
-        layer.bindPopup(popup);
-      }
-    }).addTo(map);
-});
+fetch("https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/TornadoTracks_1980_2009.geojson")
+    .then((res) => res.json())
+    .then((data) => {
+        L.geoJSON(data, {
+            style: function (feature) {
+                return {
+                    color: "#ffff00",
+                    weight: 4,
+                    opacity: 1,
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                let popup = `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
+                layer.bindPopup(popup);
+            },
+        }).addTo(map);
+    });
+
+let dropdownCreated = false;
+let dropdownFilled = false;
+let results = document.getElementById("results");
 
 function setMap(locationData) {
-    let searchFields = document.getElementById("searchFields");
-    let cityDropDown = document.createElement("select");
+    results.innerHTML = "";
+    console.log(results);
 
-    for (let i = 0; i < locationData.items.length; i++) {
-        let cityOption = document.createElement("option");
+    if (locationData.items.length > 0) {
+        let cityOption = document.createElement("input");
+        let cityLabel = document.createElement("label");
+        for (let i = 0; i < locationData.items.length; i++) {
+            console.log("here");
+            cityOption.setAttribute("name", locationData.items[i].id);
+            cityOption.setAttribute("type", "checkbox");
+            cityOption.setAttribute("id", "citySelect");
+            cityOption.setAttribute("value", locationData.items[i].id);
 
-        cityOption.setAttribute("name", "citySelect");
-        cityOption.setAttribute("id", "citySelect");
-        cityOption.setAttribute("value", locationData.items[i].name);
-        cityDropDown.setAttribute("name", "cityDropDown");
-        cityDropDown.setAttribute("id", "cityDropDown");
+            cityLabel.setAttribute("id", "citySelect");
+            cityLabel.textContent = `${locationData.items[i].name}, ${provinceCodes[locationData.items[i].province.code]} `;
 
-        cityOption.setAttribute("value", locationData.items[i].name + ", " + provinceCodes[locationData.items[i].province.code]);
-
-        console.log(locationData.items[i].province.code);
-
-        cityOption.textContent = locationData.items[i].name + ", " + provinceCodes[locationData.items[i].province.code];
-        cityDropDown.appendChild(cityOption);
+            console.log(locationData.items[i].province.code);
+            results.appendChild(cityLabel);
+            results.appendChild(cityOption);
+            results.style.display = "block";
+        }
     }
-    searchFields.appendChild(cityDropDown);
 
     let refinedData = locationData.items;
 
-    document.getElementById("cityDropDown").addEventListener("change", function () {
-        console.log(refinedData);
-        let selectedCity = document.getElementById("cityDropDown").selectedIndex;
-        console.log(selectedCity);
-    });
+    console.log(results);
+    // document.getElementById("cityDropDown").addEventListener("change", function () {
+    //     console.log(refinedData);
+    //     let selectedCity = document.getElementById("cityDropDown").selectedOptions[0].label;
+    //     let selectedCityIndex = document.getElementById("cityDropDown").selectedIndex;
+    //     let selectedCityValue = document.getElementById("cityDropDown").value;
+    //     console.log(selectedCity);
+    //     console.log(selectedCityIndex);
+    //     console.log(refinedData);
+    //     console.log(refinedData.length);
+
+    //     for (let y = 0; y < refinedData.length; y++) {
+    //         console.log(refinedData[y]);
+    //         if (refinedData[y].id === selectedCityValue) {
+    //             latitude = refinedData[y].latitude;
+    //             longitude = refinedData[y].longitude;
+    //             map.flyTo(new L.LatLng(latitude, longitude), 8);
+    //             layer = L.marker([latitude, longitude]).addTo(map);
+    //             break;
+    //         }
+    //     }
+    // });
 }
 
 function success(position) {
