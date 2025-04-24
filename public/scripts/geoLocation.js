@@ -248,92 +248,92 @@ var buildings3 = L.tileLayer
     })
     .addTo(map);
 
-fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/Tornados_1980_2009.geojson')    
-.then(res => res.json())
-.then(data => {
-        data.features = data.features.map(f => ({
-                ...f,
-                geometry: {
-                  type: "Point",
-                  coordinates: [
-                    parseFloat(f.properties.start_lon),
-                    parseFloat(f.properties.start_lat)
-                  ]
-                }
-              }));
+fetch("https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/Tornados_1980_2009.geojson")
+    .then((res) => res.json())
+    .then((data) => {
+        data.features = data.features.map((f) => ({
+            ...f,
+            geometry: {
+                type: "Point",
+                coordinates: [parseFloat(f.properties.start_lon), parseFloat(f.properties.start_lat)],
+            },
+        }));
 
-    L.geoJSON(data,{ 
-        pointToLayer: function(feature, latlng) {
-                return L.circleMarker(latlng, {
-                  radius: 4,
-                  fillColor: "#ffff00", 
-                  color: "#eaff00",
-                  weight: 2,
-                  opacity: 1,
-                  fillOpacity: 0.9
-                });
-              },
-              onEachFeature: function(feature, layer) {
-                let props = feature.properties;
-                let popup = `<b>Tornado</b>` + 
-                            `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
-                             <b>Nearest Community:</b> ${props.nearcmmty || "N/A"}<br>
-                             <b>Fujita Scale:</b> ${props.fujita_ || "N/A"}`;
-                    layer.bindPopup(popup);
-                },
-            }).addTo(map);
-});
-
-fetch('https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/TornadoTracks_1980_2009.geojson')
-  .then(res => res.json())
-  .then(data => {
-        data.features = data.features.map(f => ({
-                ...f,
-                geometry: {
-                  type: "LineString",
-                  coordinates: [
-                    [parseFloat(f.properties.start_lon), parseFloat(f.properties.start_lat)],
-                    [parseFloat(f.properties.end_lon), parseFloat(f.properties.end_lat)]
-                  ]
-                }
-              }));
-    
         L.geoJSON(data, {
-      style: function(feature) {
-        return {
-          color: "#ffff00",
-          weight: 4,
-          opacity: 1
-        };
-      },
-      onEachFeature: function(feature, layer) {
-        let popup = `<b>Tornado Track</b>` + 
-                    `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
-        layer.bindPopup(popup);
-      }
-    }).addTo(map);
-});
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 4,
+                    fillColor: "#ffff00",
+                    color: "#eaff00",
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.9,
+                });
+            },
+            onEachFeature: function (feature, layer) {
+                let props = feature.properties;
+                let popup =
+                    `<b>Tornado</b>` +
+                    `<b>Year:</b> ${props.yyyy_local || "N/A"}<br>
+                            <b>Nearest Community:</b> ${props.nearcmmty || "N/A"}<br>
+                            <b>Fujita Scale:</b> ${props.fujita_ || "N/A"}`;
+                layer.bindPopup(popup);
+            },
+        }).addTo(map);
+    });
+
+fetch("https://raw.githubusercontent.com/TornadoWise/TornadoWise/refs/heads/Martha_Sandbox/data/TornadoTracks_1980_2009.geojson")
+    .then((res) => res.json())
+    .then((data) => {
+        data.features = data.features.map((f) => ({
+            ...f,
+            geometry: {
+                type: "LineString",
+                coordinates: [
+                    [parseFloat(f.properties.start_lon), parseFloat(f.properties.start_lat)],
+                    [parseFloat(f.properties.end_lon), parseFloat(f.properties.end_lat)],
+                ],
+            },
+        }));
+
+        L.geoJSON(data, {
+            style: function (feature) {
+                return {
+                    color: "#ffff00",
+                    weight: 4,
+                    opacity: 1,
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                let popup = `<b>Tornado Track</b>` + `<b>Year:</b> ${feature.properties.yyyy_local || "N/A"}`;
+                layer.bindPopup(popup);
+            },
+        }).addTo(map);
+    });
 
 function setMap(locationData) {
     results.innerHTML = "";
+    layer.remove();
     console.log(results);
 
     if (locationData.items.length > 0) {
-        let cityOption = document.createElement("input");
-        let cityLabel = document.createElement("label");
         for (let i = 0; i < locationData.items.length; i++) {
-            console.log("here");
-            cityOption.setAttribute("name", locationData.items[i].id);
-            cityOption.setAttribute("type", "checkbox");
+            let cityOption = document.createElement("input");
+            let cityLabel = document.createElement("label");
+            let breakCity = document.createElement("br");
+            let horizontalRule = document.createElement("hr");
+            cityOption.setAttribute("name", "citySelect");
+            cityOption.setAttribute("type", "radio");
             cityOption.setAttribute("id", "citySelect");
             cityOption.setAttribute("value", locationData.items[i].id);
 
             cityLabel.setAttribute("id", "citySelect");
             cityLabel.textContent = `${locationData.items[i].name}, ${provinceCodes[locationData.items[i].province.code]} `;
 
-            console.log(locationData.items[i].province.code);
             results.appendChild(cityLabel);
             results.appendChild(cityOption);
+            results.appendChild(breakCity);
+            results.appendChild(horizontalRule);
             results.style.display = "block";
         }
     }
@@ -341,36 +341,32 @@ function setMap(locationData) {
     let refinedData = locationData.items;
 
     console.log(results);
-    // document.getElementById("cityDropDown").addEventListener("change", function () {
-    //     console.log(refinedData);
-    //     let selectedCity = document.getElementById("cityDropDown").selectedOptions[0].label;
-    //     let selectedCityIndex = document.getElementById("cityDropDown").selectedIndex;
-    //     let selectedCityValue = document.getElementById("cityDropDown").value;
-    //     console.log(selectedCity);
-    //     console.log(selectedCityIndex);
-    //     console.log(refinedData);
-    //     console.log(refinedData.length);
+    document.querySelectorAll('input[name="citySelect"]').forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            console.log(refinedData);
+            console.log(this.value);
 
-    //     for (let y = 0; y < refinedData.length; y++) {
-    //         console.log(refinedData[y]);
-    //         if (refinedData[y].id === selectedCityValue) {
-    //             latitude = refinedData[y].latitude;
-    //             longitude = refinedData[y].longitude;
-    //             map.flyTo(new L.LatLng(latitude, longitude), 8);
-    //             layer = L.marker([latitude, longitude]).addTo(map);
-    //             break;
-    //         }
-    //     }
-    // });
+            for (let y = 0; y < refinedData.length; y++) {
+                console.log(refinedData[y]);
+                if (refinedData[y].id === this.value) {
+                    latitude = refinedData[y].latitude;
+                    longitude = refinedData[y].longitude;
+                    map.flyTo(new L.LatLng(latitude, longitude), 8);
+                    layer.remove();
+                    layer = L.marker([latitude, longitude]).addTo(map);
+                    break;
+                }
+            }
+        });
+    });
 }
 
 function success(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 
-    console.log("Your current location:");
-    console.log(position);
-
+    layer.remove();
+    layer = L.marker([latitude, longitude]).addTo(map);
     map.flyTo(new L.LatLng(latitude, longitude), 8);
 }
 
