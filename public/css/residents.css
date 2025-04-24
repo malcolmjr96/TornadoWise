@@ -1,3 +1,7 @@
 #map {
     height: 50vh;
 }
+
+#results {
+    display: none;
+}
